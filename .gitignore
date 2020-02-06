@@ -1,52 +1,61 @@
-# Prerequisites
-*.d
-
-# Object files
+.config
 *.o
-*.ko
-*.obj
-*.elf
+*.pyc
 
-# Linker output
-*.ilk
-*.map
-*.exp
+# gtags
+GTAGS
+GRTAGS
+GPATH
 
-# Precompiled Headers
-*.gch
-*.pch
+# emacs
+.dir-locals.el
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
+# emacs temp file suffixes
+*~
+.#*
+\#*#
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+# eclipse setting
+.settings
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+# Example project files
+examples/**/sdkconfig
+examples/**/sdkconfig.old
+examples/**/build
 
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
+#Doc build artifacts
+docs/_build/
+docs/doxygen-warning-log.txt
+docs/sphinx-warning-log.txt
+docs/sphinx-warning-log-sanitized.txt
+docs/xml/
+docs/man/
 
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+# Unit test app files
+tools/unit-test-app/sdkconfig
+tools/unit-test-app/sdkconfig.old
+tools/unit-test-app/build
+tools/unit-test-app/builds
+tools/unit-test-app/output
+
+# AWS IoT Examples require device-specific certs/keys
+examples/protocols/aws_iot/*/main/certs/*.pem.*
+
+# gcov coverage reports
+*.gcda
+*.gcno
+coverage.info
+coverage_report/
+sdkconfig
+sdkconfig.old
+build
+*.pdf
+*.zip
+*.bin
+key
+flash_encrypted.sh
+flash_first.sh
+build.sh
+
+#VS folder
+.vscode/
