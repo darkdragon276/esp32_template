@@ -4,5 +4,5 @@
 #
 
 IDF_PATH := esp-idf
-PROJECT_NAME := esp-valve-fw
+PROJECT_NAME := esp32_template
 include $(IDF_PATH)/make/project.mk
