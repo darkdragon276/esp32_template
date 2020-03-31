@@ -2,9 +2,9 @@
 
 - Installation
 ```
-git clone --recursive git@github.com:darkdragon276/esp32_template.git 
-cd pas-valve-fw
-git submodule update --init --recursive
+git clone --recurse-submodules git@github.com:darkdragon276/esp32_template.git 
+cd esp32_template
 make menuconfig
 make flash monitor -j12
 ```
+

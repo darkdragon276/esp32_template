@@ -57,5 +57,9 @@ flash_encrypted.sh
 flash_first.sh
 build.sh
 
+#vscode
+.vscode/
+.DS_store
+
 #VS folder
 .vscode/
