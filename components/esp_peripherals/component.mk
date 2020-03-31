@@ -3,8 +3,8 @@
 #
 # (Uses default behaviour of compiling all source files in directory, adding 'include' to include path.)
 
-COMPONENT_ADD_INCLUDEDIRS := ./include ./lib/adc_button ./lib/gpio_isr ./driver/i2c_bus
-COMPONENT_SRCDIRS :=  . ./lib ./lib/sdcard ./lib/button ./lib/touch ./lib/blufi ./lib/adc_button ./lib/IS31FL3216 ./driver/i2c_bus ./lib/gpio_isr
-COMPONENT_PRIV_INCLUDEDIRS := ./lib/sdcard ./lib/button ./lib/touch ./lib/blufi ./lib/IS31FL3216 ./driver/i2c_bus
+COMPONENT_ADD_INCLUDEDIRS := ./include ./lib/gpio_isr ./lib/adc_button ./lib/button ./audio/include
+COMPONENT_SRCDIRS :=  . ./lib/button ./lib/adc_button ./lib/gpio_isr ./audio
+COMPONENT_PRIV_INCLUDEDIRS := ./lib/button
 
 CFLAGS+=-D__FILENAME__=\"$(<F)\"
