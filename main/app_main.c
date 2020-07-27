@@ -30,27 +30,30 @@ TaskHandle_t task_1 = NULL, task_2 = NULL, task_3 = NULL;
 
 static void task_1s(void* arg) {
     // ESP_LOGI("GPIO", "enter task 1s");
+    printf("enter task 1s \n");
     while(1) {
-        printf("enter task 1s \n");
         vTaskDelay(1000 / portTICK_RATE_MS);
+        printf("task 1s \n");
     }
 }
 
 
 static void task_3s(void* arg) {
     // ESP_LOGI("GPIO", "enter task 3s");
+    printf("enter task 3s \n");
     while(1) {
-        printf("enter task 3s \n");
         vTaskDelay(3000 / portTICK_RATE_MS);
+        printf("task 3s \n");
     }
 }
 
 
 static void task_5s(void* arg) {
     // ESP_LOGI("GPIO", "enter task 5s");
+    printf("enter task 5s \n");
     while(1) {
-        printf("enter task 5s \n");
         vTaskDelay(5000 / portTICK_RATE_MS);
+        printf("task 5s \n");
     }
 }
 
@@ -80,7 +83,7 @@ static void gpio_task(void* arg)
                     xTaskCreate(task_5s, "create task 1s", 1024, NULL, 12, &task_3);
                 break;
                 default:
-                    printf("task state is unknow");
+                    printf("task state is unknow \n");
                 break;
             }
             vTaskDelay(500 / portTICK_RATE_MS);
@@ -108,7 +111,7 @@ void app_main() {
     gpio_isr_handler_add(GPIO_NUM_0, button_isr, (void *)GPIO_NUM_0);
 
     while(1) {
-        printf("in main \n");
+        printf("\ntick \n");
         vTaskDelay(1000 / portTICK_RATE_MS);
     }
 }
