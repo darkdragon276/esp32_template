@@ -16,6 +16,8 @@
 
 #include "esp_log.h"
 
+#define TASK_CREATE(name)   xTaskCreate(task_##name##, "task_##name##", 1024, NULL, 10 + name, &task_##name##)
+
 typedef enum {
     TASK_NONE,
     TASK_1S,
@@ -74,13 +76,13 @@ static void gpio_task(void* arg)
             printf("in button isr \n");
             switch(task_state_en++) {
                 case TASK_1S:
-                    xTaskCreate(task_1s, "create task 1s", 1024, NULL, 10, &task_1);
+                    TASK_CREATE(TASK_1S);
                 break;
                 case TASK_3S:
-                    xTaskCreate(task_3s, "create task 1s", 1024, NULL, 11, &task_2);
+                    TASK_CREATE(TASK_3S);
                 break;
                 case TASK_5S:
-                    xTaskCreate(task_5s, "create task 1s", 1024, NULL, 12, &task_3);
+                    TASK_CREATE(TASK_5S);
                 break;
                 default:
                     printf("task state is unknow \n");
