@@ -6,31 +6,47 @@
 #include "freertos/queue.h"
 #include "driver/gpio.h"
 
-int state = 0;
+#include "esp_log.h"
+
+#define TASK_CREATE(name)   xTaskCreate(task_##name##, "task_##name##", 1024, NULL, 10 + name, &task_##name##)
+
+typedef enum {
+    TASK_NONE,
+    TASK_1S,
+    TASK_3S,
+    TASK_5S,
+    TASK_MAX,
+} gpio_TaskType_ten;
+
+static gpio_TaskType_ten task_state_en = TASK_NONE;
 static xQueueHandle gpio_evt_queue = NULL;
 
 static void IRAM_ATTR button_isr(void* arg){
     uint32_t gpio_num = (uint32_t) arg;
     xQueueSendFromISR(gpio_evt_queue, &gpio_num, NULL);
 }
+
 static void Task_1(void*arg) {
     while(1) {  
         printf("ngat 1 giay\n");
         vTaskDelay(1000 / portTICK_RATE_MS);
     }
 }
+
 static void Task_2(void*arg){
     while(1){  
         printf("ngat 3 giay\n");
         vTaskDelay(3000 / portTICK_RATE_MS);
     }
 }
+
 static void Task_3(void*arg){
     while(1){  
         printf("ngat 5 giay\n");
         vTaskDelay(5000 / portTICK_RATE_MS);
     }
-}        
+}   
+
 static void Task(void* arg){
     uint32_t io_num = 1;
     while(1){
@@ -39,22 +55,27 @@ static void Task(void* arg){
                 printf("%d", io_num);
                 continue;
             }
-        // state = io_num;
-        state ++;
-        if(state == 1){
-            xTaskCreate(Task_1, "Task_1", 2048, NULL, 10, NULL);
-        } else if(state == 2){
-            xTaskCreate(Task_2, "Task_2", 2048, NULL, 10, NULL);
-        } else if(state == 3){
-            xTaskCreate(Task_3, "Task_3", 2048, NULL, 20, NULL);
-        }else if (state == 4){
-            state = 0;
-        }
-        xQueueReset(gpio_evt_queue);
-        vTaskDelay(500 / portTICK_RATE_MS);
+            printf("in button isr \n");
+            switch(task_state_en++) {
+                case TASK_1S:
+                    TASK_CREATE(TASK_1S);
+                break;
+                case TASK_3S:
+                    TASK_CREATE(TASK_3S);
+                break;
+                case TASK_5S:
+                    TASK_CREATE(TASK_5S);
+                break;
+                default:
+                    printf("task state is unknow \n");
+                break;
+            }
+            vTaskDelay(500 / portTICK_RATE_MS);
+            xQueueReset(gpio_evt_queue);  
         }
     }
 }
+
 void app_main(){
     // implement button
     gpio_config_t button_config ;
