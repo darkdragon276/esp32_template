@@ -14,7 +14,7 @@ static void IRAM_ATTR dd_gpio_isr_handler(void* intr_value_vpt){
 }
 void dd_gpio_Config_func(dd_gpio_Config_tst gpioConfig){
     gpio_config((gpio_config_t*)&gpioConfig); // get the value of button signal
-    gpio_set_intr_type(gpioConfig.ioNum_en,dd_gpio_intr_posEdge_en); // set interrupt type (gpio 0, rising)
+    gpio_set_intr_type(gpioConfig.dd_gpio_num_0_en,dd_gpio_intr_type_en dd_gpio_intr_posEdge_en); // set interrupt type (gpio 0, rising)
     gpio_install_isr_service(ESP_INTR_FLAG_EDGE); // interrupt whenever the signal is asserted
     gpio_isr_handle_add(gpioConfig.ioNum_en, gpioConfig.isrHandler_func, gpioConfig.isrArgument);
     dd_gpio_Queue_v = xQueueCreate(gpioConfig.queueLenght_cu32, sizeof(uint32_t));
