@@ -81,12 +81,13 @@ typedef struct {
     UBaseType_t queueSize_u32;
 } dd_gpio_Config_tst;
 
-void dd_gpio_Config_func(dd_gpio_Config_tst gpioConfig){
+void dd_gpio_Config_func(dd_gpio_Config_tst gpioConfig);
 /**
  * @brief {function description}
  * @param[in] signal input form gpio
- * @
-}
+ * @return this func use to config the gpio pin
+ */
+
 #ifdef __cplusplus
 }
 #endif
